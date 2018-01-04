@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Picker, FlatList, TextInput } from 'react-native';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { addTask } from '../../actions/todoActions';
 
 class Setting extends React.Component {
 	static navigationOptions = {
@@ -22,6 +24,7 @@ class Setting extends React.Component {
 		super(props);
 		this.state = {
 			checked: false,
+			newTaskName: '',
 		};
 	}
 	render() {
@@ -29,7 +32,13 @@ class Setting extends React.Component {
 			<View style={styles.container}>
 				<View style={styles.textStyle}>
 					<Text style={styles.titleText}>Name</Text>
-					<TextInput style={styles.textInputStyle} underlineColorAndroid="transparent">
+					<TextInput
+						style={styles.textInputStyle}
+						underlineColorAndroid="transparent"
+						value={`${this.state.newTaskName}`}
+						onSubmitEditing={() => this.props.addTask(this.state.newTaskName)}
+						onChangeText={text => this.setState({ newTaskName: text })}
+					>
 						Thanks For Watching
 					</TextInput>
 				</View>
@@ -75,7 +84,7 @@ class Setting extends React.Component {
 					</View>
 				</View>
 				<View style={styles.iconStyle}>
-					<TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+					<TouchableOpacity onPress={() => this.props.navigation.goBack().addTask(this.state.newTaskName)}>
 						<MaterialIcons color="green" size={64} name="check-circle" />
 					</TouchableOpacity>
 				</View>
@@ -123,4 +132,4 @@ const styles = {
 	},
 };
 
-export default Setting;
+export default connect(null, { addTask })(Setting);

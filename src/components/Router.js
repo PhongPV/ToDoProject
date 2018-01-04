@@ -1,10 +1,10 @@
 import { StackNavigator } from 'react-navigation';
-import Home from './Home';
-import Setting from './Setting';
+import TaskList from './TaskList';
+import Setting from './Setting/Setting';
 
 const Router = StackNavigator({
-	Home: {
-		screen: Home,
+	TaskList: {
+		screen: TaskList,
 		navigationOptions: {
 			header: null,
 		},
