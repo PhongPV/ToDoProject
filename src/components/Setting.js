@@ -8,14 +8,7 @@ import PriorityConatiner from './Setting/PriorityConatiner';
 import CheckIcon from './Setting/CheckIcon';
 import DashLine from './Setting/DashLine';
 
-import { Provider } from 'react-redux';
-
 import ChooseColorContainer from '../containers/ChooseColorContainer';
-import configureStore from '../store/store';
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { AppLoading } from 'expo';
-
-const { store, persistor } = configureStore();
 
 class Setting extends React.Component {
 	static navigationOptions = {
@@ -37,25 +30,40 @@ class Setting extends React.Component {
 		super(props);
 		this.state = {
 			color: 'purple',
+			content: '',
 		};
 	}
+	onChangeText(text) {
+		this.setState(() => {
+			return {
+				content: text,
+			};
+		});
+	}
+	onChangeColor(color) {
+		this.setState(() => {
+			return {
+				color: color,
+			};
+		});
+	}
 	render() {
+		var currentDate = new Date();
+		var hour = currentDate.getHours();
+		var minute = currentDate.getMinutes();
+		var time = hour + ':' + minute;
 		const navigation = this.props.navigation;
 		return (
-			<Provider store={store}>
-				<PersistGate persistor={persistor} loading={<AppLoading />}>
-					<View style={styles.container}>
-						<NameContainer />
-						<DashLine />
-						<DateContainer />
-						<DashLine />
-						<TimeContainer />
-						<DashLine />
-						<ChooseColorContainer />
-						<CheckIcon navigation={navigation} />
-					</View>
-				</PersistGate>
-			</Provider>
+			<View style={styles.container}>
+				<NameContainer onChange={this.onChangeText.bind(this)} />
+				<DashLine />
+				<DateContainer />
+				<DashLine />
+				<TimeContainer time={time} />
+				<DashLine />
+				<ChooseColorContainer onChange={this.onChangeColor.bind(this)} />
+				<CheckIcon navigation={navigation} color={this.state.color} time={time} content={this.state.content} />
+			</View>
 		);
 	}
 }

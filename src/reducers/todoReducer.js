@@ -1,16 +1,23 @@
+import _ from 'lodash';
+
 const initState = {
 	data: [
 		{
 			title: 'TO DO',
-			data: [{ content: 'Chua xong dau', check: false }, { content: 'Sap xong roi', check: false }],
+			data: [
+				{ color: 'red', time: '11:00', content: 'Chua xong dau', check: false },
+				{ color: 'red', time: '11:00', content: 'Sap xong roi', check: false },
+			],
+			total: 2,
 		},
 		{
 			title: 'DONE',
 			data: [
-				{ content: 'Xong roi', check: true },
-				{ content: 'Done roi', check: true },
-				{ content: 'Ok roi', check: true },
+				{ color: 'red', time: '11:00', content: 'Xong roi', check: true },
+				{ color: 'red', time: '11:00', content: 'Done roi', check: true },
+				{ color: 'red', time: '11:00', content: 'Ok roi', check: true },
 			],
+			total: 3,
 		},
 	],
 };
@@ -18,13 +25,15 @@ const initState = {
 export default function todoReducer(state = initState, action) {
 	switch (action.type) {
 		case 'addTask':
-			return Object.assign(
-				{},
-				{
-					...state.data.get(0),
-					data: [...state.data.get(0), { content: action.content, check: false }],
-				}
-			);
+			const newState = _.cloneDeep(state);
+			newState.data[0].data.push({
+				color: action.color,
+				time: action.time,
+				content: action.content,
+				check: false,
+			});
+			newState.data[0].total += 1;
+			return newState;
 		case 'deleteTask':
 			return Object.assign(
 				{},
@@ -36,16 +45,15 @@ export default function todoReducer(state = initState, action) {
 			);
 		case 'finishItem':
 			if (action.check === false) {
-				state.data[0].data.splice(action.index, 1);
-				state.data[1].data.push({ content: action.content, check: true });
-				let newData = state.data;
-				return Object.assign(
-					{},
-					{
-						...state.data,
-						data: newData,
-					}
-				);
+				const newState = _.cloneDeep(state);
+				newState.data[0].data.splice(action.index, 1);
+				newState.data[1].data.push({
+					color: action.color,
+					time: action.time,
+					content: action.content,
+					check: true,
+				});
+				return newState;
 			} else {
 				return state;
 			}

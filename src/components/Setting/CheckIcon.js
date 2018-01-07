@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { connect } from 'react-redux';
+import { addTask } from '../../actions/todoActions';
+
 const CheckIcon = props => {
 	const styles = {
 		iconStyle: {
@@ -11,13 +14,17 @@ const CheckIcon = props => {
 			alignSelf: 'flex-end',
 		},
 	};
-	const navigation = props.navigation;
+	const checkIcon = () => {
+		props.addTask(props.color, props.time, props.content);
+		props.navigation.goBack();
+	};
 	return (
 		<View style={styles.iconStyle}>
-			<TouchableOpacity onPress={() => navigation.goBack()}>
+			<TouchableOpacity onPress={() => checkIcon()}>
 				<MaterialIcons color="green" size={64} name="check-circle" />
 			</TouchableOpacity>
 		</View>
 	);
 };
-export default CheckIcon;
+
+export default connect(null, { addTask })(CheckIcon);
