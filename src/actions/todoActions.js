@@ -4,9 +4,11 @@ const addTask = content => {
 		content,
 	};
 };
-const finishItem = content => {
+const finishItem = (content, check, index) => {
 	return {
 		type: 'finishItem',
+		index,
+		check,
 		content,
 	};
 };

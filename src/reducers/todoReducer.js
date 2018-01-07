@@ -1,11 +1,11 @@
 const initState = {
 	data: [
 		{
-			title: 'TO DO ()',
+			title: 'TO DO',
 			data: [{ content: 'Chua xong dau', check: false }, { content: 'Sap xong roi', check: false }],
 		},
 		{
-			title: 'DONE ()',
+			title: 'DONE',
 			data: [
 				{ content: 'Xong roi', check: true },
 				{ content: 'Done roi', check: true },
@@ -35,15 +35,20 @@ export default function todoReducer(state = initState, action) {
 				}
 			);
 		case 'finishItem':
-			state.data[1].data.push({ content: action.content, check: true });
-			let newData = state.data;
-			return Object.assign(
-				{},
-				{
-					...state.data,
-					data: newData,
-				}
-			);
+			if (action.check === false) {
+				state.data[0].data.splice(action.index, 1);
+				state.data[1].data.push({ content: action.content, check: true });
+				let newData = state.data;
+				return Object.assign(
+					{},
+					{
+						...state.data,
+						data: newData,
+					}
+				);
+			} else {
+				return state;
+			}
 		default:
 			return state;
 	}

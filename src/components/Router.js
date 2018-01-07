@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
 import TaskList from './TaskList';
-import Setting from './Setting/Setting';
+import Setting from './Setting';
 
 const Router = StackNavigator({
 	TaskList: {
