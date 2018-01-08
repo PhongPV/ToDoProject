@@ -4,21 +4,8 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { chooseColor } from '../../actions/settingActions';
 class PriorityContainer extends React.Component {
-	state = {
-		color: 'green',
-	};
-	onChangeColor = color => {
-		this.setState({
-			color,
-		});
-		this.props.onChangeColor(color);
-	};
 	renderItem = ({ item, index }) => (
-		<TouchableOpacity
-			style={styles.radioStyle}
-			onPress={() => this.props.chooseColor(index)}
-			onChangeColor={this.onChangeColor}
-		>
+		<TouchableOpacity style={styles.radioStyle} onPress={() => this.props.chooseColor(index, item.key)}>
 			{item.choose ? (
 				<MaterialIcons name="radio-button-checked" size={20} color={item.key} />
 			) : (
@@ -37,12 +24,6 @@ class PriorityContainer extends React.Component {
 		);
 	}
 }
-
-const mapStateToProps = state => {
-	return {
-		data: state.setting.data,
-	};
-};
 
 const styles = {
 	textStyle: {
@@ -63,4 +44,4 @@ const styles = {
 		paddingLeft: 10,
 	},
 };
-export default connect(mapStateToProps, { chooseColor })(PriorityContainer);
+export default PriorityContainer;

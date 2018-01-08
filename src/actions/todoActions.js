@@ -16,10 +16,11 @@ const finishItem = (color, time, content, check, index) => {
 		content,
 	};
 };
-const deleteTask = index => {
+const deleteTask = (index, check) => {
 	return {
 		type: 'deleteTask',
 		index,
+		check,
 	};
 };
 

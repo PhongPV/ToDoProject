@@ -2,14 +2,7 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 class NameContainer extends React.Component {
-	state = {
-		text: 'Thanks For Watching',
-	};
 	onChangeText = text => {
-		console.log(text);
-		this.setState({
-			text,
-		});
 		this.props.onChange(text);
 	};
 	render() {
@@ -20,7 +13,7 @@ class NameContainer extends React.Component {
 					style={styles.textInputStyle}
 					underlineColorAndroid="transparent"
 					onChangeText={this.onChangeText}
-					value={this.state.text}
+					value={this.props.value}
 				/>
 			</View>
 		);

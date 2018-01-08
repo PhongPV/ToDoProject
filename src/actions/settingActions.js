@@ -1,7 +1,8 @@
-const chooseColor = index => {
+const chooseColor = (index, choose) => {
 	return {
 		type: 'chooseColor',
 		index,
+		choose,
 	};
 };
 

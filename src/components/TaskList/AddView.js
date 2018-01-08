@@ -1,26 +1,41 @@
 import React from 'react';
-import { View, Text, SectionList, TouchableOpacity } from 'react-native';
+import { View, Text, SectionList, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { finishItem, deleteTask } from '../../actions/todoActions';
+const { width } = Dimensions.get('window');
 class AddView extends React.Component {
+	state = {
+		slideAnim: new Animated.Value(0),
+	};
+	animAction() {
+		Animated.timing(this.state.slideAnim, {
+			toValue: -70,
+			duration: 1000,
+		}).start();
+	}
 	renderItem = ({ item, index }) => {
 		return (
-			<View style={styles.item}>
-				<View style={[styles.itemHeaderView, { backgroundColor: item.color }]} />
-				<View style={styles.itemTextContainer}>
-					<Text>{item.time}</Text>
-					<Text style={styles.itemText}>{item.content}</Text>
+			<View style={styles.itemContainer}>
+				<View style={[styles.item]}>
+					<View style={[styles.itemHeaderView, { backgroundColor: item.color }]} />
+					<View style={styles.itemTextContainer}>
+						<Text>{item.time}</Text>
+						<Text style={styles.itemText}>{item.content}</Text>
+					</View>
+					<TouchableOpacity
+						style={styles.itemCheckContainer}
+						onPress={() => this.props.finishItem(item.color, item.time, item.content, item.check, index)}
+					>
+						{item.check ? (
+							<MaterialIcons name="check-circle" color="green" size={25} />
+						) : (
+							<MaterialIcons size={25} name="radio-button-unchecked" />
+						)}
+					</TouchableOpacity>
 				</View>
-				<TouchableOpacity
-					style={styles.itemCheckContainer}
-					onPress={() => this.props.finishItem(item.color, item.time, item.content, item.check, index)}
-				>
-					{item.check ? (
-						<MaterialIcons name="check-circle" color="green" size={25} />
-					) : (
-						<MaterialIcons size={25} name="radio-button-unchecked" />
-					)}
+				<TouchableOpacity style={styles.deleteView} onPress={() => this.props.deleteTask(index, item.check)}>
+					<Text style={{ color: '#ffff', paddingHorizontal: 5 }}>Delete</Text>
 				</TouchableOpacity>
 			</View>
 		);
@@ -46,14 +61,28 @@ class AddView extends React.Component {
 export default AddView;
 
 const styles = {
-	item: {
+	itemContainer: {
 		marginHorizontal: 10,
 		marginVertical: 5,
+		flexDirection: 'row',
+	},
+	item: {
 		alignItems: 'center',
+		borderRadius: 7,
+		elevation: 1,
+		backgroundColor: '#ffff',
+		height: 65,
+		width: width - 70,
+		flexDirection: 'row',
+		//{ transform: [{ translateX: this.state.slideAnim }] }
+	},
+	deleteView: {
 		borderRadius: 7,
 		elevation: 3,
 		height: 65,
-		flexDirection: 'row',
+		backgroundColor: 'red',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	sectionHeader: {
 		fontSize: 15,

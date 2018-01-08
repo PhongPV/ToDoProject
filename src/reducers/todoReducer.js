@@ -35,14 +35,13 @@ export default function todoReducer(state = initState, action) {
 			newState.data[0].total += 1;
 			return newState;
 		case 'deleteTask':
-			return Object.assign(
-				{},
-				{
-					...state,
-					data: state.data.get(0).filter((item, i) => i != action.index),
-					data: state.data.get(1).filter((item, i) => i != action.index),
-				}
-			);
+			const newData = _.cloneDeep(state);
+			if (action.check === false) {
+				newData.data[0].data.splice(action.index, 1);
+			} else {
+				newData.data[1].data.splice(action.index, 1);
+			}
+			return newData;
 		case 'finishItem':
 			if (action.check === false) {
 				const newState = _.cloneDeep(state);
