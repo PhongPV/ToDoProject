@@ -27,6 +27,30 @@ const Header = props => {
 			justifyContent: 'center',
 		},
 	};
+	var weekday = new Array(7);
+	weekday[0] = 'SUN';
+	weekday[1] = 'MON';
+	weekday[2] = 'TUE';
+	weekday[3] = 'WED';
+	weekday[4] = 'THU';
+	weekday[5] = 'FRI';
+	weekday[6] = 'SAT';
+	var currentDate = new Date();
+	var year = currentDate.getFullYear();
+	var month = currentDate.getMonth();
+	var day = currentDate.getDate();
+	function getDaysInMonth(month, year, day) {
+		var date = new Date(year, month, day);
+		var days = [];
+		while (date.getMonth() === month) {
+			var dateName = date.getDate() + '';
+			//var dayName = weekday.get(date.getDay());
+			days.push({ key: dateName, day: weekday[date.getDay()] });
+			date.setDate(date.getDate() + 1);
+		}
+		return days;
+	}
+	console.log('date---', getDaysInMonth(month, year, day));
 	return (
 		<View style={styles.header}>
 			<View style={styles.headerTitle}>
@@ -42,19 +66,13 @@ const Header = props => {
 			</View>
 			<View style={styles.headerDate}>
 				<FlatList
-					data={[
-						{ key: 'MON', day: 21 },
-						{ key: 'TUE', day: 22 },
-						{ key: 'WED', day: 23 },
-						{ key: 'THUR', day: 24 },
-						{ key: 'FRI', day: 25 },
-					]}
+					data={getDaysInMonth(month, year, day)}
 					horizontal
 					renderItem={({ item }) => (
 						<TouchableOpacity>
 							<View style={styles.item}>
 								<Text>{item.key}</Text>
-								<Text style={{ fontSize: 25 }}>{item.day}</Text>
+								<Text style={{ fontSize: 20 }}>{item.day}</Text>
 								<Entypo name="dot-single" color="red" size={25} />
 							</View>
 						</TouchableOpacity>

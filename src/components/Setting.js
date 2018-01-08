@@ -52,7 +52,7 @@ class Setting extends React.Component {
 		var minute = currentDate.getMinutes();
 		var time = hour + ':' + minute;
 		const navigation = this.props.navigation;
-		console.log('data', this.props.data);
+		console.log('color', this.props.data);
 		return (
 			<View style={styles.container}>
 				<NameContainer onChange={this.onChangeText.bind(this)} value={this.state.text} />
