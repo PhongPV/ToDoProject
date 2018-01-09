@@ -1,12 +1,13 @@
-const addTask = (color, time, content) => {
+const addTask = (color, time, content, date) => {
 	return {
 		type: 'addTask',
 		color,
 		time,
 		content,
+		date,
 	};
 };
-const finishItem = (color, time, content, check, index) => {
+const finishItem = (color, time, content, date, check, index) => {
 	return {
 		type: 'finishItem',
 		index,
@@ -14,6 +15,7 @@ const finishItem = (color, time, content, check, index) => {
 		color,
 		time,
 		content,
+		date,
 	};
 };
 const deleteTask = (index, check) => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Picker } from 'react-native';
+import { View, Text, Picker, TextInput } from 'react-native';
 
-const DateContainer = () => {
+const DateContainer = props => {
 	const styles = {
 		textStyle: {
 			flexDirection: 'row',
@@ -18,15 +18,18 @@ const DateContainer = () => {
 			flex: 3,
 		},
 	};
-	var currentDate = new Date().toDateString();
-
+	onChangeDate = date => {
+		props.onDate(date);
+	};
 	return (
 		<View style={styles.textStyle}>
 			<Text style={styles.titleText}>Date</Text>
-			<Picker style={styles.contentText}>
-				<Picker.Item label={currentDate} value="java" />
-				<Picker.Item label="JavaScript" value="js" />
-			</Picker>
+			<TextInput
+				style={styles.contentText}
+				onChangeText={this.onChangeDate}
+				value={props.date}
+				underlineColorAndroid="transparent"
+			/>
 		</View>
 	);
 };

@@ -7,12 +7,18 @@ import AddIcon from './TaskList/AddIcon';
 import TaskListContainer from '../containers/TaskListContainer';
 
 class TaskList extends React.Component {
+	state = {
+		date: '1/9/2018',
+	};
+	onDateValue(date) {
+		this.setState({ date: date.data });
+	}
 	render() {
 		const navigation = this.props.navigation;
 		return (
 			<View style={styles.container}>
-				<Header />
-				<TaskListContainer />
+				<Header onChange={this.onDateValue.bind(this)} />
+				<TaskListContainer date={this.state.date} />
 				<AddIcon navigation={navigation} />
 			</View>
 		);

@@ -5,19 +5,17 @@ const initState = {
 		{
 			title: 'TO DO',
 			data: [
-				{ color: 'red', time: '11:00', content: 'Chua xong dau', check: false },
-				{ color: 'red', time: '11:00', content: 'Sap xong roi', check: false },
+				{ color: 'red', time: '11:00', date: '09/01/2018', content: 'Chua xong dau', check: false },
+				{ color: 'red', time: '11:00', date: '09/01/2018', content: 'Sap xong roi', check: false },
 			],
-			total: 2,
 		},
 		{
 			title: 'DONE',
 			data: [
-				{ color: 'red', time: '11:00', content: 'Xong roi', check: true },
-				{ color: 'red', time: '11:00', content: 'Done roi', check: true },
-				{ color: 'red', time: '11:00', content: 'Ok roi', check: true },
+				{ color: 'red', time: '11:00', date: '09/01/2018', content: 'Xong roi', check: true },
+				{ color: 'red', time: '11:00', date: '09/01/2018', content: 'Done roi', check: true },
+				{ color: 'red', time: '11:00', date: '09/01/2018', content: 'Ok roi', check: true },
 			],
-			total: 3,
 		},
 	],
 };
@@ -29,6 +27,7 @@ export default function todoReducer(state = initState, action) {
 			newState.data[0].data.push({
 				color: action.color,
 				time: action.time,
+				date: action.date,
 				content: action.content,
 				check: false,
 			});
@@ -49,6 +48,7 @@ export default function todoReducer(state = initState, action) {
 				newState.data[1].data.push({
 					color: action.color,
 					time: action.time,
+					date: action.date,
 					content: action.content,
 					check: true,
 				});

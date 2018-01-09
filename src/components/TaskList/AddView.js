@@ -5,15 +5,6 @@ import { connect } from 'react-redux';
 import { finishItem, deleteTask } from '../../actions/todoActions';
 const { width } = Dimensions.get('window');
 class AddView extends React.Component {
-	state = {
-		slideAnim: new Animated.Value(0),
-	};
-	animAction() {
-		Animated.timing(this.state.slideAnim, {
-			toValue: -70,
-			duration: 1000,
-		}).start();
-	}
 	renderItem = ({ item, index }) => {
 		return (
 			<View style={styles.itemContainer}>
@@ -25,7 +16,9 @@ class AddView extends React.Component {
 					</View>
 					<TouchableOpacity
 						style={styles.itemCheckContainer}
-						onPress={() => this.props.finishItem(item.color, item.time, item.content, item.check, index)}
+						onPress={() =>
+							this.props.finishItem(item.color, item.time, item.content, item.date, item.check, index)
+						}
 					>
 						{item.check ? (
 							<MaterialIcons name="check-circle" color="green" size={25} />

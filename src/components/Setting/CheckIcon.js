@@ -15,7 +15,7 @@ const CheckIcon = props => {
 		},
 	};
 	const checkIcon = () => {
-		props.addTask(props.color, props.time, props.content);
+		props.addTask(props.color, props.time, props.content, props.date);
 		props.navigation.goBack();
 	};
 	return (
