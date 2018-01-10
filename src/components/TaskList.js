@@ -6,15 +6,21 @@ import AddView from './TaskList/AddView';
 import AddIcon from './TaskList/AddIcon';
 import TaskListContainer from '../containers/TaskListContainer';
 
+var currentDate = new Date();
+var year = currentDate.getFullYear();
+var month = currentDate.getMonth() + 1;
+var day = currentDate.getDate();
+var date = day + '/' + month + '/' + year;
 class TaskList extends React.Component {
 	state = {
-		date: '1/9/2018',
+		date: date,
 	};
 	onDateValue(date) {
 		this.setState({ date: date.data });
 	}
 	render() {
 		const navigation = this.props.navigation;
+		console.log('a', this.props);
 		return (
 			<View style={styles.container}>
 				<Header onChange={this.onDateValue.bind(this)} />

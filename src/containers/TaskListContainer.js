@@ -1,12 +1,7 @@
 import { connect } from 'react-redux';
 import AddView from '../components/TaskList/AddView';
 import { finishItem, deleteTask } from '../actions/todoActions';
-
-var currentDate = new Date();
-var year = currentDate.getFullYear();
-var month = currentDate.getMonth();
-var day = currentDate.getDate();
-var date = day + '/' + month + '/' + year;
+import _ from 'lodash';
 var newData = {
 	data: [
 		{
@@ -35,9 +30,9 @@ getDate = (state, props) => {
 	return newData;
 };
 const mapStateToProps = (state, props) => {
-	var newState = getDate(state, props);
-	console.log('sss', newState);
-	console.log('aaa', state.addview.data);
+	var newState = _.cloneDeep(getDate(state, props));
+	console.log('sss', props);
+	// console.log('aaa', state.addview.data);
 	return {
 		data: newState.data,
 	};

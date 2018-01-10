@@ -39,12 +39,20 @@ class Setting extends React.Component {
 			color: 'purple',
 			date: mdate,
 			text: 'Thank for watching',
+			timeT: time,
 		};
 	}
 	onChangeText(text) {
 		this.setState(() => {
 			return {
 				text,
+			};
+		});
+	}
+	onChangeTime(timeT) {
+		this.setState(() => {
+			return {
+				timeT,
 			};
 		});
 	}
@@ -68,13 +76,13 @@ class Setting extends React.Component {
 				<DashLine />
 				<DateContainer date={this.state.date} onDate={this.onChangeDate.bind(this)} />
 				<DashLine />
-				<TimeContainer time={time} />
+				<TimeContainer time={this.state.timeT} onTime={this.onChangeTime.bind(this)} />
 				<DashLine />
 				<ChooseColorContainer onChange={this.onChangeColor.bind(this)} />
 				<CheckIcon
 					navigation={navigation}
 					color={this.state.color}
-					time={time}
+					time={this.state.timeT}
 					content={this.state.text}
 					date={this.state.date}
 				/>

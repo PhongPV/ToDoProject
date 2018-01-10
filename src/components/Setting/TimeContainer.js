@@ -1,12 +1,22 @@
 import React from 'react';
-import { View, Text, Picker, TimePickerAndroid, TouchableOpacity } from 'react-native';
+import { View, Text, Picker, TimePickerAndroid, TouchableOpacity, TextInput } from 'react-native';
 class TimeContainer extends React.Component {
+	state = {
+		time: '10:00',
+	};
+	onChangeValue = text => {
+		this.props.onTime(text);
+	};
 	render() {
 		return (
 			<View style={styles.textStyle}>
 				<Text style={styles.titleText}>Time</Text>
 				<TouchableOpacity style={styles.contentText}>
-					<Text>{this.props.time}</Text>
+					<TextInput
+						onChangeText={this.onChangeValue}
+						underlineColorAndroid="transparent"
+						value={this.props.time}
+					/>
 				</TouchableOpacity>
 			</View>
 		);
