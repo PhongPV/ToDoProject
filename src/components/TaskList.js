@@ -20,7 +20,6 @@ class TaskList extends React.Component {
 	}
 	render() {
 		const navigation = this.props.navigation;
-		console.log('a', this.props);
 		return (
 			<View style={styles.container}>
 				<Header onChange={this.onDateValue.bind(this)} />

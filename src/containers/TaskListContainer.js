@@ -31,7 +31,7 @@ getDate = (state, props) => {
 };
 const mapStateToProps = (state, props) => {
 	var newState = _.cloneDeep(getDate(state, props));
-	console.log('sss', props);
+	// console.log('sss', props);
 	// console.log('aaa', state.addview.data);
 	return {
 		data: newState.data,

@@ -7,7 +7,6 @@ import TimeContainer from './Setting/TimeContainer';
 import PriorityConatiner from './Setting/PriorityConatiner';
 import CheckIcon from './Setting/CheckIcon';
 import DashLine from './Setting/DashLine';
-import ChooseColorContainer from '../containers/ChooseColorContainer';
 
 var currentDate = new Date();
 var hour = currentDate.getHours();
@@ -18,20 +17,26 @@ var month = currentDate.getMonth() + 1;
 var year = currentDate.getFullYear();
 var mdate = day + '/' + month + '/' + year;
 class Setting extends React.Component {
-	static navigationOptions = {
-		title: 'ADD NEW TASK',
-		headerTitleStyle: {
-			alignSelf: 'center',
-		},
-		headerStyle: {
-			backgroundColor: 'purple',
-		},
-		headerRight: (
-			<TouchableOpacity style={{ paddingRight: 10 }}>
-				<MaterialIcons name="more-horiz" color="#ffff" size={32} />
-			</TouchableOpacity>
-		),
-		headerTintColor: '#ffff',
+	static navigationOptions = ({ navigation }) => {
+		const value = navigation.state.params;
+		for (var key in value) {
+			var name = value[key] + '';
+		}
+		return {
+			title: 'ADD NEW TASK',
+			headerTitleStyle: {
+				alignSelf: 'center',
+			},
+			headerStyle: {
+				backgroundColor: name,
+			},
+			headerRight: (
+				<TouchableOpacity style={{ paddingRight: 10 }}>
+					<MaterialIcons name="more-horiz" color="#ffff" size={32} />
+				</TouchableOpacity>
+			),
+			headerTintColor: '#ffff',
+		};
 	};
 	constructor(props) {
 		super(props);
@@ -67,6 +72,10 @@ class Setting extends React.Component {
 				color,
 			};
 		});
+		this.props.navigation.setParams({ color });
+	}
+	componentWillMount() {
+		this.props.navigation.setParams({ color: this.state.color });
 	}
 	render() {
 		const navigation = this.props.navigation;
@@ -78,7 +87,7 @@ class Setting extends React.Component {
 				<DashLine />
 				<TimeContainer time={this.state.timeT} onTime={this.onChangeTime.bind(this)} />
 				<DashLine />
-				<ChooseColorContainer onChange={this.onChangeColor.bind(this)} />
+				<PriorityConatiner onColor={this.onChangeColor.bind(this)} />
 				<CheckIcon
 					navigation={navigation}
 					color={this.state.color}
