@@ -74,17 +74,6 @@ class Header extends React.Component {
 					</TouchableOpacity>
 					<Picker style={{ width: 200 }} selectedValue={this.state.pickItem} onValueChange={this.pickItem}>
 						<Picker.Item label="JANUARY 2018" value="JANUARY 2018" />
-						<Picker.Item label="FEBRUARY 2018" value="FEBRUARY 2018" />
-						<Picker.Item label="MARCH 2018" value="MARCH 2018" />
-						<Picker.Item label="APRIL 2018" value="APRIL 2018" />
-						<Picker.Item label="MAY 2018" value="MAY 2018" />
-						<Picker.Item label="JUNE 2018" value="JUNE 2018" />
-						<Picker.Item label="JULY 2018" value="JULY 2018" />
-						<Picker.Item label="AUGUST 2018" value="AUGUST 2018" />
-						<Picker.Item label="SEPTEMBER 2018" value="SEPTEMBER 2018" />
-						<Picker.Item label="OCTOBER 2018" value="OCTOBER 2018" />
-						<Picker.Item label="NOVEMBER 2018" value="NOVEMBER 2018" />
-						<Picker.Item label="DECEMBER 2018" value="DECEMBER 2018" />
 					</Picker>
 					<TouchableOpacity>
 						<EvilIcons name="search" size={32} />

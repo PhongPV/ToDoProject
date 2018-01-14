@@ -14,16 +14,21 @@ var date = day + '/' + month + '/' + year;
 class TaskList extends React.Component {
 	state = {
 		date: date,
+		length: [],
 	};
 	onDateValue(date) {
 		this.setState({ date: date.data });
+	}
+	getDataValue(data) {
+		console.log('d', data);
+		// this.setState({ length: data });
 	}
 	render() {
 		const navigation = this.props.navigation;
 		return (
 			<View style={styles.container}>
 				<Header onChange={this.onDateValue.bind(this)} />
-				<TaskListContainer date={this.state.date} />
+				<TaskListContainer date={this.state.date} getData={this.getDataValue.bind(this)} />
 				<AddIcon navigation={navigation} />
 			</View>
 		);

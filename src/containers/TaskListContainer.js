@@ -29,9 +29,12 @@ getDate = (state, props) => {
 	}
 	return newData;
 };
+getDataValue = (data, props) => {
+	props.getData(data);
+};
 const mapStateToProps = (state, props) => {
 	var newState = _.cloneDeep(getDate(state, props));
-	// console.log('sss', props);
+	getDataValue(state.addview.data[0], props);
 	// console.log('aaa', state.addview.data);
 	return {
 		data: newState.data,
